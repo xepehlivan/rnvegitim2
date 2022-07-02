@@ -1,0 +1,66 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core" 
+    xmlns:f="sap.ui.layout.form"
+    xmlns:up="sap.m.upload"
+    xmlns:u="sap.ui.unified">
+    <Dialog id="dialogEmployee" afterClose="onAfterCloseDialog">
+        <content>
+                <f:SimpleForm id="SimpleFormChange354"
+                    editable="true"
+                    layout="ResponsiveGridLayout"
+                    title="Address"
+                    labelSpanXL="3"
+                    labelSpanL="3"
+                    labelSpanM="3"
+                    labelSpanS="12"
+                    adjustLabelSpan="false"
+                    emptySpanXL="4"
+                    emptySpanL="4"
+                    emptySpanM="4"
+                    emptySpanS="0"
+                    columnsXL="1"
+                    columnsL="1"
+                    columnsM="1"
+                    singleContainerFullSize="false" >
+                    <f:content>
+                        <Label text="{i18n>id}" />
+                        <Input value="{NewEmployeeModel>/Id}" editable="{= ${NewEmployeeModel>/isExist} ? false : true}"/>
+                        <Label text="{i18n>name}" />
+                        <Input value="{NewEmployeeModel>/Name}" />
+                        <Label text="{i18n>surname}" />
+                        <Input value="{NewEmployeeModel>/Surname}" />
+                        <Label text="{i18n>empTitle}" />
+                        <ComboBox selectedKey="{NewEmployeeModel>/Title}">
+                            <items>
+                                <core:Item text="Developer"      key="dev"/>
+                                <core:Item text="Team Lead"      key="teaml"/>
+                                <core:Item text="Technical Lead" key="techl"/>
+                            </items>
+                        </ComboBox>
+                        <Label/>
+                        <u:FileUploader id="fileUploader" useMultipart="false" sendXHR="true" name="myFileUpload" uploadUrl="/sap/opu/odata/sap/ZRNV_EGITIM_SRV/ImageSet"
+						    width="400px" tooltip="Upload your file to the local server" uploadComplete="onUploadCompleted" />
+                    </f:content>
+                </f:SimpleForm>
+                 <!--
+                <up:UploadSet id="attachmentUpl" instantUpload="false" maxFileSize="25" noDataDescription="" noDataText=""
+					uploadCompleted="onUploadCompleted" uploadUrl="/sap/opu/odata/sap/ZRNV_EGITIM_SRV/ImageSet" visible="true"
+					beforeUploadStarts="onBeforeUploadStarts" fileTypes="pdf,doc,docx,docm,ppt,pptx,xls,xlsx,jpg,jpeg,png" fileTypeMismatch="onFileTypeMismatch"
+					fileSizeExceeded="onFileSizeExceeded" selectionChanged="onSelectionChangeAttachment">
+					<up:toolbar>
+						<OverflowToolbar>
+							<CheckBox id="checkbox" text="{i18n>selectAll}" select="onSelectAllAttachments" visible="false"/>
+							<ToolbarSpacer/>
+							<Button id="buttonRemove" enabled="false" icon="sap-icon://delete" press="onRemove" type="Transparent" visible="true"/>
+							<Button id="buttonDownload" enabled="false" icon="sap-icon://download" press="onDownload" type="Transparent" visible="true"/>
+						</OverflowToolbar> 
+					</up:toolbar>
+				</up:UploadSet> 
+                -->
+        </content>
+        <buttons>
+            <Button id="btnSave" text="{i18n>save}" press="onSaveEmployee" />
+        </buttons>
+    </Dialog>
+</core:FragmentDefinition>

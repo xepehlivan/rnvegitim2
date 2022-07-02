@@ -1,0 +1,106 @@
+<mvc:View
+    controllerName="renova.egitim2.controller.Worklist"
+    xmlns="sap.m"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:semantic="sap.f.semantic"
+    	xmlns:core="sap.ui.core">
+
+    <semantic:SemanticPage
+        id="page"
+        headerPinnable="false"
+        toggleHeaderOnTitleClick="false">
+
+        <semantic:titleHeading>
+            <Title
+                text="{i18n>worklistTitle}"
+                level="H2"/>
+        </semantic:titleHeading>
+
+        <semantic:content>
+            <Table
+                id="table"
+                width="auto"
+                items="{EmployeeModel>/}"
+                noDataText="{worklistView>/tableNoDataText}"
+                busyIndicatorDelay="{worklistView>/tableBusyDelay}"
+                growing="true"
+                growingScrollToLoad="true"
+                updateFinished=".onUpdateFinished">
+
+                <headerToolbar>
+                    <OverflowToolbar>
+                        <Title
+                            id="tableHeader"
+                            text="{worklistView>/worklistTableTitle}"
+                            level="H3"/>
+                        <ToolbarSpacer />
+                        <SearchField
+                            id="searchField"
+                            tooltip="{i18n>worklistSearchTooltip}"
+                            search=".onSearch">
+                            <layoutData>
+                                <OverflowToolbarLayoutData
+                                    maxWidth="200px"
+                                    priority="NeverOverflow"/>
+                            </layoutData>
+                        </SearchField>
+                        <Button text="{i18n>addEmployee}" press="onAddEmployee" icon="sap-icon://add"/>
+                        <Button text="{i18n>approveAllEmployee}" press="onApproveAllEmployee" type="Emphasized"/>
+                        <Button text="{i18n>getAllEmployeeAndProject}" press="onGetAllEmployeeAndProject" type="Emphasized"/>
+                        <Button text="{i18n>getAllEmployeeAndProjectJson}" press="onGetAllEmployeeAndProjectJson" type="Emphasized"/>
+                        <Button text="{i18n>approveAllEmployeeJson}" press="onApproveAllEmployeeJson" type="Emphasized"/>
+                        <ComboBox items="{/EmployeSearcHelpSet}">
+                            <core:Item key="{Id}" text="{Name} {Surname}" />
+                        </ComboBox>
+                    </OverflowToolbar>
+                </headerToolbar>
+
+                <columns>
+                    <Column ></Column>
+                    <Column >
+                        <Text text="{i18n>Id}" />
+                    </Column>
+                    <Column >
+                        <Text text="{i18n>Name}" />
+                    </Column>
+                    <Column >
+                        <Text text="{i18n>Surname}" />
+                    </Column>
+                    <Column >
+                        <Text text="{i18n>Title}" />
+                    </Column>
+                    <Column hAlign="End">
+                    </Column>
+                    <Column hAlign="End">
+                    </Column>
+                </columns>
+
+                <items>
+                    <ColumnListItem
+                        type="Navigation"
+                        press=".onPress">
+                        <cells>
+                        <Image src="/sap/opu/odata/sap/ZRNV_EGITIM_SRV/ImageSet(DocId='{EmployeeModel>Id}')/$value" width="5rem" height="3rem"/>
+                        <ObjectIdentifier
+                            title="{EmployeeModel>Id}"/>
+                        <ObjectIdentifier
+                            title="{EmployeeModel>Name}"/>
+                        <ObjectIdentifier
+                            title="{EmployeeModel>Surname}"/>
+                        <ObjectIdentifier
+                            title="{EmployeeModel>Title}"/>
+                        <Button press="onDelete" icon="sap-icon://delete"></Button>
+                        <Button press="onShowProjects" icon="sap-icon://show"></Button>  
+                        </cells>
+                    </ColumnListItem>
+                </items>
+            </Table>
+        </semantic:content>
+
+        <semantic:sendEmailAction>
+            <semantic:SendEmailAction id="shareEmail" press=".onShareEmailPress"/>
+        </semantic:sendEmailAction>
+
+    </semantic:SemanticPage>
+
+</mvc:View>
